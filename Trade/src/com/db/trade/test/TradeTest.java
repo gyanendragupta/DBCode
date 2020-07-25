@@ -72,6 +72,7 @@ public class TradeTest {
 		TradeStore ts = new TradeStore();
 		ts.insertNewTrade(t1);
 		ts.insertNewTrade(t2);
+		TradeStore.setTodayDate("28/07/2020");
 		ts.updateExpiredFlag();
 		assertEquals('Y', ts.getTradeStore().get("T41").getExpired());
 		assertEquals('Y', ts.getTradeStore().get("T52").getExpired());

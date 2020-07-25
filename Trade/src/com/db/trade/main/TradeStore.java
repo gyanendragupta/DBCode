@@ -14,6 +14,23 @@ import java.util.function.Predicate;
 public class TradeStore {
 	
 	private HashMap<String, Trade> tradeStore = new HashMap<>(1000);
+	private static String todayDate = "25/07/2020";
+	
+
+	/**
+	 * @return the todayDate
+	 */
+	public static String getTodayDate() {
+		return todayDate;
+	}
+
+
+	/**
+	 * @param todayDate the todayDate to set
+	 */
+	public static void setTodayDate(String todayDate) {
+		TradeStore.todayDate = todayDate;
+	}
 	
 	/**
 	 * @return the tradeStore
@@ -52,7 +69,7 @@ public class TradeStore {
 	public boolean isMaturydateDateValid(Trade t) {
 		boolean isMaturityDateValid = true;
 		String maturityDate = t.getMaturityDate();
-		System.out.println("The maturityDate is: " + maturityDate);
+		//System.out.println("The maturityDate is: " + maturityDate);
 		
 		SimpleDateFormat sdformat = new SimpleDateFormat("dd/MM/yyyy");
 		Date md = null; 
@@ -97,7 +114,6 @@ public class TradeStore {
 		getTradeStore().entrySet().stream().filter(new MaturyDateLessThanToday()).forEach(t -> t.getValue().setExpired('Y'));
 		
 	}
-
 }
 
 /**
@@ -115,7 +131,7 @@ class MaturyDateLessThanToday implements Predicate<Map.Entry<String, Trade>> {
 		String maturityDate = entry.getValue().getMaturityDate();
 		try {
 			md = sdformat.parse(maturityDate);
-			today = sdformat.parse(sdformat.format(new Date()));
+			today = sdformat.parse(TradeStore.getTodayDate());
 		} catch (ParseException e) {
 			//System.out.println("MaturyDateLessThanToday :: Error parsing maturity date");
 			e.printStackTrace();
