@@ -13,7 +13,7 @@ import java.util.function.Predicate;
  */
 public class TradeStore {
 	
-	private HashMap<String, Trade> tradeStore = new HashMap<>(1000);
+	private HashMap<String, Trade> tradeStore = new HashMap<>();
 	private static String todayDate = "25/07/2020"; // variable to hold reference to today's date. Used in method MaturyDateLessThanToday() for updateExpiredFlag()
 	
 
