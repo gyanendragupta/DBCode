@@ -1,7 +1,7 @@
 package com.db.trade.main;
 
 /**
- * @author Gyanendra Gupta <gyanendra.gupta@gmail.com>
+ * @author Gyanendra Gupta
  * Trade class representing a trade entry
  */
 public class Trade {

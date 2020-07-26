@@ -8,13 +8,13 @@ import java.util.Map;
 import java.util.function.Predicate;
 
 /**
- * @author Gyanendra Gupta <gyanendra.gupta@gmail.com>
+ * @author Gyanendra Gupta
  * This is class implements the functionality of TradeStore 
  */
 public class TradeStore {
 	
 	private HashMap<String, Trade> tradeStore = new HashMap<>(1000);
-	private static String todayDate = "25/07/2020";
+	private static String todayDate = "25/07/2020"; // variable to hold reference to today's date. Used in method MaturyDateLessThanToday() for updateExpiredFlag()
 	
 
 	/**

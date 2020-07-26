@@ -1,7 +1,8 @@
 package com.db.trade.main;
 
 /**
- * @author Gyanendra Gupta <gyanendra.gupta@gmail.com>
+ * @author Gyanendra Gupta
+ * Wrapper class for exceptions
  *
  */
 public class TradingException extends Exception {

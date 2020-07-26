@@ -3,6 +3,8 @@ package com.db.trade.test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.db.trade.main.Trade;
@@ -10,10 +12,23 @@ import com.db.trade.main.TradeStore;
 import com.db.trade.main.TradingException;
 
 /**
- * @author Gyanendra Gupta <gyanendra.gupta@gmail.com>
- *
+ * @author Gyanendra Gupta
+ * Junit to test TradeStore functionality
  */
 public class TradeTest {
+	
+	TradeStore ts = null;	
+	
+	@Before
+	public void setup () {
+		ts = new TradeStore();
+	}
+	
+	@After
+	public void cleanup () {
+		ts = null;
+	}
+	
 	
 	/**
 	 * @throws TradingException
@@ -22,12 +37,9 @@ public class TradeTest {
 	@Test (expected = TradingException.class)
 	public void testLowerVersionTradeIsRejected() throws TradingException {
 		Trade t1 = new Trade ("T1", 2, "CP-1", "B1", "31/12/2020", "25/07/2020", 'N');
-		Trade t2 = new Trade ("T1", 1, "CP-1", "B1", "31/12/2020", "25/07/2020", 'N');
-		TradeStore ts = new TradeStore();
+		Trade t2 = new Trade ("T1", 1, "CP-1", "B1", "31/12/2020", "25/07/2020", 'N');		
 		ts.insertNewTrade(t1);
-		ts.insertNewTrade(t2);
-		
-		
+		ts.insertNewTrade(t2);		
 	}
 	
 	/**
@@ -37,11 +49,9 @@ public class TradeTest {
 	@Test
 	public void testSameVersionOverride() throws TradingException {
 		Trade t1 = new Trade ("T2", 2, "CP-1", "B1", "31/12/2020", "25/07/2020", 'N');
-		Trade t2 = new Trade ("T2", 2, "CP-2", "B2", "31/12/2020", "25/07/2020", 'N');
-		TradeStore ts = new TradeStore();
+		Trade t2 = new Trade ("T2", 2, "CP-2", "B2", "31/12/2020", "25/07/2020", 'N');		
 		ts.insertNewTrade(t1);
-		ts.insertNewTrade(t2);
-		
+		ts.insertNewTrade(t2);		
 		Trade t = ts.getTradeStore().get("T22");
 		assertEquals("CP-2", t.getCounterPartyId());
 		assertEquals("B2", t.getBookId());
@@ -55,7 +65,6 @@ public class TradeTest {
 	@Test
 	public void testMaturityDateLessThanToday() throws TradingException {
 		Trade t1 = new Trade ("T3", 2, "CP-1", "B1", "25/06/2020", "25/07/2020", 'N');
-		TradeStore ts = new TradeStore();
 		ts.insertNewTrade(t1);
 		assertNull(ts.getTradeStore().get("T32"));
 	}
@@ -68,11 +77,9 @@ public class TradeTest {
 	public void testExpiredFlag() throws TradingException {
 		Trade t1 = new Trade ("T4", 1, "CP-1", "B1", "27/07/2020", "25/07/2020", 'N');
 		Trade t2 = new Trade ("T5", 2, "CP-1", "B1", "27/07/2020", "25/07/2020", 'N');
-		
-		TradeStore ts = new TradeStore();
 		ts.insertNewTrade(t1);
 		ts.insertNewTrade(t2);
-		TradeStore.setTodayDate("28/07/2020");
+		TradeStore.setTodayDate("28/07/2020"); // set today's date
 		ts.updateExpiredFlag();
 		assertEquals('Y', ts.getTradeStore().get("T41").getExpired());
 		assertEquals('Y', ts.getTradeStore().get("T52").getExpired());
