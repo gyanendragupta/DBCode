@@ -10,7 +10,7 @@ import com.db.trade.main.TradeStore;
 import com.db.trade.main.TradingException;
 
 /**
- * @author maa sharda
+ * @author Gyanendra Gupta <gyanendra.gupta@gmail.com>
  *
  */
 public class TradeTest {

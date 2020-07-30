@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.function.Predicate;
 
 /**
- * @author Gyanendra Gupta
+ * @author Gyanendra Gupta <gyanendra.gupta@gmail.com>
  * This is class implements the functionality of TradeStore 
  */
 public class TradeStore {

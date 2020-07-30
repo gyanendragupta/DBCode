@@ -1,5 +1,9 @@
 package com.db.trade.main;
 
+/**
+ * @author Gyanendra Gupta <gyanendra.gupta@gmail.com>
+ * Trade class representing a trade entry
+ */
 public class Trade {
 	private String tradeId;
 	private int version;
